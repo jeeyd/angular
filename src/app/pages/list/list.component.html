@@ -5,14 +5,19 @@
             <th scope="col">Name</th>
             <th scope="col">Email Address</th>
             <th scope="col">Contact Number</th>
+            <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let contact of contacts">
-            <th scope="row">{{ contact.id }}</th>
-            <td>{{ contact.name }}</td>
-            <td>{{ contact.email }}</td>
-            <td>{{ contact.phone }}</td>
+            <th scope="row" class="align-middle">{{ contact.id }}</th>
+            <td class="align-middle">{{ contact.name }}</td>
+            <td class="align-middle">{{ contact.email }}</td>
+            <td class="align-middle">{{ contact.phone }}</td>
+            <td>
+                <button class="btn btn-success mx-1" (click)="editContact(contact)">Edit</button>
+                <button class="btn btn-danger mx-1" (click)="deleteContact(contact)">Delete</button>
+            </td>
         </tr>
     </tbody>
 </table>

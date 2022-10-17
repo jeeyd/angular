@@ -1,6 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
+import { VarsService } from 'src/app/services/vars.service';
 
 @Component({
   selector: 'app-form',
@@ -10,11 +11,36 @@ import { ApiService } from 'src/app/services/api.service';
 export class FormComponent implements OnInit {
   form!: FormGroup;
   idToStart = 2
+  idEdit = 0
 
   constructor(
     private formBuilder: FormBuilder,
-    private api: ApiService
+    private api: ApiService,
+    private vars: VarsService
   ) {
+    this.vars.onEdit.subscribe(k => {
+      if (k) {
+        this.buttons[0].type = 'hidden'
+        this.buttons[1].type = 'hidden'
+        this.buttons[2].type = ''
+        this.buttons[3].type = ''
+      } else {
+        this.idEdit = 0
+        this.buttons[0].type = ''
+        this.buttons[1].type = ''
+        this.buttons[2].type = 'hidden'
+        this.buttons[3].type = 'hidden'
+      }
+    })
+    
+    this.vars.contact.subscribe(k => {
+      if (this.form) {
+        this.idEdit = k.id
+        this.form.controls['name'].setValue(k.name)
+        this.form.controls['email'].setValue(k.email)
+        this.form.controls['phone'].setValue(k.phone.replace(/[^0-9]/g, ''))
+      }
+    })
   }
 
   fields = [
@@ -80,15 +106,19 @@ export class FormComponent implements OnInit {
     )
   }
 
-  addContact() {
+  addContact(id: any) {
     this.api.addContact({
-      id: this.idToStart,
+      id: id > 0 ? id : this.idToStart,
       name: this.form.controls['name'].value,
       email: this.form.controls['email'].value,
       phone: this.form.controls['phone'].value
-    })
-    this.idToStart++
+    }, id > 0 ? true : false)
+    id > 0 ? this.idEdit = 0 : this.idToStart++
     this.form.reset()
+  }
+
+  cancel() {
+    this.vars.isEdit(false, { phone: '!' })
   }
 
 }
