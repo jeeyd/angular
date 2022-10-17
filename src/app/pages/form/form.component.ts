@@ -1,5 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-form',
@@ -8,9 +9,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class FormComponent implements OnInit {
   form!: FormGroup;
+  idToStart = 2
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private api: ApiService
   ) {
   }
 
@@ -75,8 +78,17 @@ export class FormComponent implements OnInit {
         ]]
       }
     )
+  }
 
-    console.log(this.form)
+  addContact() {
+    this.api.addContact({
+      id: this.idToStart,
+      name: this.form.controls['name'].value,
+      email: this.form.controls['email'].value,
+      phone: this.form.controls['phone'].value
+    })
+    this.idToStart++
+    this.form.reset()
   }
 
 }
