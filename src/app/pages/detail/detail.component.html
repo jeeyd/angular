@@ -1,1 +1,14 @@
-<p>detail works!</p>
+<div class="container d-flex">
+    <div class="my-4 mx-auto">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Viewing {{ contact.name }}</h5>
+                <p class="card-text"><b>ID: </b>{{ contact.id }}</p>
+                <p class="card-text"><b>Name: </b>{{ contact.name }}</p>
+                <p class="card-text"><b>Email: </b>{{ contact.email }}</p>
+                <p class="card-text"><b>Contact: </b>{{ contact.phone }}</p>
+                <a routerLink="/" class="btn btn-primary">Back</a>
+            </div>
+        </div>
+    </div>
+</div>

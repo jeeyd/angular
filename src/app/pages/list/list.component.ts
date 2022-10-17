@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { VarsService } from 'src/app/services/vars.service';
 
@@ -12,7 +13,8 @@ export class ListComponent implements OnInit {
 
   constructor(
     private api: ApiService,
-    private vars: VarsService
+    private vars: VarsService,
+    private router: Router
   ) { 
     this.api.getContacts.subscribe(k => {
       this.contacts = k
@@ -37,6 +39,11 @@ export class ListComponent implements OnInit {
 
       this.contacts.splice(index, 1)
     })
+  }
+
+  viewContact(contact: any) {
+    this.vars.view(contact)
+    this.router.navigate(['/detail'])
   }
 
   editContact(contact: any) {
