@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { VarsService } from 'src/app/services/vars.service';
 
+//Sweet alert
+import Swal from 'sweetalert2'
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -51,7 +54,24 @@ export class ListComponent implements OnInit {
   }
 
   deleteContact(contact: any) {
-    this.api.delete(contact)
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to undo this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.api.delete(contact)
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      }
+    })
   }
 
   ngOnInit(): void {

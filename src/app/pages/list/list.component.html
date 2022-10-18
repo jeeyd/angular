@@ -10,12 +10,12 @@
     </thead>
     <tbody>
         <tr *ngFor="let contact of contacts">
-            <th scope="row" class="align-middle">{{ contact.id }}</th>
+            <td scope="row" class="align-middle"><b>{{ contact.id }}</b></td>
             <td class="align-middle">{{ contact.name }}</td>
             <td class="align-middle">{{ contact.email }}</td>
             <td class="align-middle">{{ contact.phone }}</td>
             <td>
-                <button class="btn btn-primary mx-1" (click)="viewContact(contact)">View</button>
+                <button class="btn btn-primary mx-1 color_btn" (click)="viewContact(contact)">View</button>
                 <button class="btn btn-success mx-1" (click)="editContact(contact)">Edit</button>
                 <button class="btn btn-danger mx-1" (click)="deleteContact(contact)">Delete</button>
             </td>

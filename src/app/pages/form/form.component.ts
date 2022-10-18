@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 import { VarsService } from 'src/app/services/vars.service';
 
+//Sweet alert
+import Swal from 'sweetalert2'
+
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -114,6 +117,14 @@ export class FormComponent implements OnInit {
       phone: this.form.controls['phone'].value
     }, id > 0 ? true : false)
     id > 0 ? this.idEdit = 0 : this.idToStart++
+
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Your contact has been saved',
+      showConfirmButton: false,
+      timer: 1500
+    })
     this.form.reset()
   }
 

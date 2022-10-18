@@ -1,12 +1,14 @@
-<div class="container shadow-sm mt-4 p-1">
+<div class="container shadow-sm mt-4 p-1 border_css">
+
     <form [formGroup]="form" class="m-5">
+        <p class="header">Contact Details</p>
         <div class="mb-3" *ngFor="let field of fields">
             <label class="form-label">{{ field.name }} <span style="color: red">*</span></label>
             <input type="{{ field.type == 'phone' ? 'tel' : field.type }}" class="form-control" formControlName="{{ field.type }}" placeholder="{{ field.placeholder }}" maxlength="{{ field.type == 'phone' ? 11 : 50 }}" required>
             <div *ngIf="this.form.controls[field.type].touched">
-                <div *ngIf="!this.form.controls[field.type].value">· {{ field.placeholder }} is required!</div>
-                <div *ngIf="this.form.controls[field.type].status == 'INVALID'">· {{ field.placeholder }} is not valid!</div>
-                <div *ngIf="this.form.controls[field.type].status == 'INVALID' && field.type == 'phone'">· Phone number must be 11 digits</div>
+                <div *ngIf="!this.form.controls[field.type].value" class="validation_text">· {{ field.placeholder }} is required!</div>
+                <div *ngIf="this.form.controls[field.type].status == 'INVALID'" class="validation_text">· {{ field.placeholder }} is not valid!</div>
+                <div *ngIf="this.form.controls[field.type].status == 'INVALID' && field.type == 'phone'" class="validation_text">· Phone number must be 11 digits</div>
             </div>
         </div>
         <div class="row">

@@ -1,0 +1,21 @@
+.detail_container{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.card_container{
+    border: 2px solid #6ba8df;
+}
+.header{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #6ba8df;
+}
+a{
+    background-color: #6ba8df;
+    border: 1px solid #6ba8df;
+}

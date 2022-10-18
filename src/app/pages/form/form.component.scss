@@ -1,3 +1,20 @@
 .hidden {
     display: none;
 }
+.header{
+    font-size: 2rem;
+    font-weight: bold;
+    color: #6ba8df;
+}
+.validation_text{
+    color: rgb(204, 38, 38);
+}
+input[type='button']:hover{
+    cursor: pointer;
+    opacity: 80%;
+}
+.border_css{
+    border: 2px solid #6ba8df;
+    border-radius: 20px;
+    background-color: #ffff;
+}
